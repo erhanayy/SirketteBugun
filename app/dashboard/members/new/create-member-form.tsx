@@ -26,7 +26,7 @@ export default function CreateMemberForm() {
                 >
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Yeni Üye Kaydı</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Yeni Çalışan Kaydı</h2>
             </div>
 
             <div className="bg-white dark:bg-zinc-800 p-6 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm">
@@ -112,9 +112,8 @@ export default function CreateMemberForm() {
 
                     {/* Role */}
                     <div className="space-y-2">
-                        <label htmlFor="role" className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                            <Shield className="w-4 h-4 text-gray-400" />
-                            Üyelik Tipi <span className="text-red-500">*</span>
+                        <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Çalışan Tipi <span className="text-red-500">*</span>
                         </label>
                         <select
                             id="role"

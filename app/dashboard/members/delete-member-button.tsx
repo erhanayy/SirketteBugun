@@ -34,8 +34,8 @@ export default function DeleteMemberButton({ memberId }: { memberId: string }) {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={handleDelete}
-                title="Üyeyi Sil"
-                message="Bu üyeyi silmek istediğinize emin misiniz? Bu işlem geri alınamaz ancak veriler arşivlenir."
+                title="Çalışanı Sil"
+                message="Bu çalışanı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ancak veriler arşivlenir."
                 confirmText={isPending ? "Siliniyor..." : "Sil"}
                 isDestructive={true}
             />

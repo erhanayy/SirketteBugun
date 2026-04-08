@@ -107,3 +107,12 @@ Bu doküman, sistemdeki **Uygulama Admin'i (Superadmin)**, **Şirket Yöneticisi
 - [ ] Z22: Arama çubuğuna metin yazılarak yalnızca eşleşen Post-it notlarının görülmesi sağlanıyor.
 - [ ] Z23: Kullanıcı girdiği notu üzerine tıklayarak düzenleyebiliyor (Edit) veya silebiliyor.
 - [ ] Z24: Kullanıcı yalnızca KENDİ oluşturduğu notları görüyor, diğer kişilerin notları listesinde listelenmiyor.
+
+## 12. Mini Onay Akışı (Approval Flow)
+**Tüm Roller İçin Geçerli Senaryolar (Admin, Staff):**
+- [ ] Z25: Kullanıcı "Akış Başlat" diyerek dinamik formları hatasız görüntüleyebiliyor.
+- [ ] Z26: Kullanıcının hiyerarşide yöneticisi yoksa sistem form oluşturmasına engel oluyor.
+- [ ] Z27: İlgili yönetici, "Onay Bekleyenler" sekmesinde kendisine gelen talepleri onaylayıp veya reddedebiliyor.
+
+**Şirket Yöneticisi (Admin/M):**
+- [ ] M18: Yönetici, Yönetim sayfasından yeni "Akış" ekleyip silebilir ve form alanlarını dinamik belirleyebilir.

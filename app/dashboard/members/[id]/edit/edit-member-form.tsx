@@ -27,7 +27,7 @@ export default function EditMemberForm({ member }: { member: any }) {
                 >
                     <ArrowLeft className="w-5 h-5" />
                 </Link>
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Üye Düzenle</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Çalışan Düzenle</h2>
             </div>
 
             <div className="bg-white dark:bg-zinc-800 p-6 rounded-xl border border-gray-200 dark:border-zinc-700 shadow-sm">
@@ -110,17 +110,17 @@ export default function EditMemberForm({ member }: { member: any }) {
 
                     {/* Role */}
                     <div className="space-y-2">
-                        <label htmlFor="role" className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
-                            <Shield className="w-4 h-4 text-gray-400" />
-                            Üyelik Tipi <span className="text-red-500">*</span>
+                        <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Çalışan Tipi <span className="text-red-500">*</span>
                         </label>
                         <select
                             id="role"
                             name="role"
                             defaultValue={defaultValues.role}
-                            className="w-full bg-gray-50 dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all appearance-none"
+                            className="w-full h-11 px-4 rounded-xl border border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900/50 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none"
+                            required
                         >
-                            <option value="member">Üye</option>
+                            <option value="member">Çalışan</option>
                             <option value="staff">Şirket Çalışanı</option>
                             <option value="admin">Şirket Yöneticisi</option>
                         </select>

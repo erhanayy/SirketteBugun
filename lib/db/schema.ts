@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, uuid, integer, unique, pgEnum, index } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, boolean, uuid, integer, unique, pgEnum, index, jsonb } from 'drizzle-orm/pg-core';
 import type { AnyPgColumn } from 'drizzle-orm/pg-core';
 
 // Tenants (Şirketler)
@@ -479,6 +479,41 @@ export const notes = pgTable('notes', {
     userIdx: index('notes_user_idx').on(t.userId),
 }));
 
+// Mini Approval Flow (Basit Onay Akışı)
+export const approvalFlows = pgTable('approval_flows', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id').references(() => tenants.id).notNull(),
+    name: text('name').notNull(),
+    approvalLevel: integer('approval_level').default(1).notNull(), // 0 = En üst (Top), N = N. seviyeye kadar
+    fields: jsonb('fields').default([]).notNull(), // Dinamik alan (Array)
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (t) => ({
+    tenantIdx: index('approval_flows_tenant_idx').on(t.tenantId),
+}));
+
+export const approvalRequests = pgTable('approval_requests', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id').references(() => tenants.id).notNull(),
+    flowId: uuid('flow_id').references(() => approvalFlows.id).notNull(),
+    requesterId: uuid('requester_id').references(() => users.id).notNull(),
+    currentApproverId: uuid('current_approver_id').references(() => users.id),
+
+    status: text('status', { enum: ['pending', 'approved', 'rejected'] }).default('pending').notNull(),
+    fieldData: jsonb('field_data').default({}).notNull(),
+    attachmentUrl: text('attachment_url'),
+    currentLevel: integer('current_level').default(1).notNull(),
+
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (t) => ({
+    tenantIdx: index('approval_req_tenant_idx').on(t.tenantId),
+    requesterIdx: index('approval_req_req_idx').on(t.requesterId),
+    approverIdx: index('approval_req_appr_idx').on(t.currentApproverId),
+}));
+
 // tenant_personalization (Şirket Kişiselleştirme - Renkler vb.)
 export const tenantPersonalization = pgTable('tenant_personalization', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -508,6 +543,8 @@ export const usersRelations = relations(users, ({ many, one }) => ({
     createdReminders: many(reminders, { relationName: 'reminderCreator' }),
     assignedReminders: many(reminders, { relationName: 'reminderAssignee' }),
     notes: many(notes),
+    approvalRequests: many(approvalRequests, { relationName: 'approvalRequester' }),
+    pendingApprovals: many(approvalRequests, { relationName: 'approvalCurrentApprover' }),
 }));
 
 export const tenantUsersRelations = relations(tenantUsers, ({ one }) => ({
@@ -863,6 +900,35 @@ export const notesRelations = relations(notes, ({ one }) => ({
     user: one(users, {
         fields: [notes.userId],
         references: [users.id],
+    }),
+}));
+
+export const approvalFlowsRelations = relations(approvalFlows, ({ one, many }) => ({
+    tenant: one(tenants, {
+        fields: [approvalFlows.tenantId],
+        references: [tenants.id],
+    }),
+    requests: many(approvalRequests),
+}));
+
+export const approvalRequestsRelations = relations(approvalRequests, ({ one }) => ({
+    tenant: one(tenants, {
+        fields: [approvalRequests.tenantId],
+        references: [tenants.id],
+    }),
+    flow: one(approvalFlows, {
+        fields: [approvalRequests.flowId],
+        references: [approvalFlows.id],
+    }),
+    requester: one(users, {
+        fields: [approvalRequests.requesterId],
+        references: [users.id],
+        relationName: 'approvalRequester',
+    }),
+    currentApprover: one(users, {
+        fields: [approvalRequests.currentApproverId],
+        references: [users.id],
+        relationName: 'approvalCurrentApprover',
     }),
 }));
 

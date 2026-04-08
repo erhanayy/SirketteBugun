@@ -161,7 +161,7 @@ export default function TenantSettingsPage({
                     Şirket Bilgileri
                 </h1>
                 <p className="text-sm text-gray-500 mt-1 italic">
-                    Derneğinizin genel bilgilerini buradan güncelleyebilirsiniz.
+                    Şirketinizin genel bilgilerini buradan güncelleyebilirsiniz.
                 </p>
             </div>
 

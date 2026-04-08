@@ -132,18 +132,21 @@ export default async function DashboardLayout({
 
                         {/* İş */}
                         <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">İş</div>
+                        <NavItem href="/dashboard/members" icon={Users} label="Çalışanlar" />
                         <NavItem href="/dashboard/organization" icon={Building} label="Organizasyon" />
                         <NavItem href="/dashboard/projects" icon={ClipboardList} label="Proje & Task" />
                         <NavItem href="/dashboard/reminders" icon={Bell} label="Hatırlatma" />
                         <NavItem href="/dashboard/notes" icon={StickyNote} label="Notlar" />
+                        <NavItem href="/dashboard/flows" icon={ClipboardList} label="Akışlar" />
 
                         {/* Yönetim */}
-                        {(userRole === 'admin' || userRole === 'staff' || userRole === 'manager') && (
+                        {(userRole === 'admin' || userRole === 'manager') && (
                             <>
                                 <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">Yönetim</div>
                                 <NavItem href="/dashboard" icon={LayoutDashboard} label="Genel Bakış" />
                                 <NavItem href="/dashboard/tenant-settings" icon={Building} label="Şirket Bilgileri" />
                                 <NavItem href="/dashboard/ibans" icon={CreditCard} label="Banka Hesapları" />
+                                <NavItem href="/dashboard/admin/approvals" icon={Settings} label="Akış Tanımlama" />
                             </>
                         )}
 

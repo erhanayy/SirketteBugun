@@ -1,0 +1,10 @@
+#!/usr/bin/expect
+set timeout -1
+spawn npm run db:generate
+expect {
+  "table created or renamed from another table?" {
+    send "\r"
+    exp_continue
+  }
+  eof
+}

@@ -20,14 +20,14 @@ export default async function MembersPage({
 
     const tenantData = await getCurrentTenant();
     const userRole = tenantData?.userRole || "member";
-    const canManageMembers = userRole === "admin" || userRole === "manager" || userRole === "staff";
+    const canManageMembers = userRole === "admin" || userRole === "manager";
 
     return (
         <div className="space-y-6">
             {/* Header & Actions */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-end gap-3">
-                    <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Üyeler</h2>
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Çalışanlar</h2>
                     <span className="text-sm font-medium text-gray-500 pb-1">({members.length} Kayıt)</span>
                 </div>
                 {canManageMembers && (
@@ -36,7 +36,7 @@ export default async function MembersPage({
                         className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors shadow-sm w-full sm:w-auto justify-center"
                     >
                         <Plus className="w-5 h-5" />
-                        Yeni Üye Ekle
+                        Yeni Çalışan Ekle
                     </Link>
                 )}
             </div>
@@ -52,7 +52,7 @@ export default async function MembersPage({
                     <div className="col-span-full text-center py-12 text-gray-500 bg-white dark:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700 border-dashed">
                         <User className="w-12 h-12 mx-auto mb-3 opacity-20" />
                         <p>
-                            {query ? "Aradığınız kriterlere uygun üye bulunamadı." : "Henüz kayıtlı üye bulunmuyor."}
+                            {query ? "Aradığınız kriterlere uygun çalışan bulunamadı." : "Henüz kayıtlı çalışan bulunmuyor."}
                         </p>
                     </div>
                 ) : (
