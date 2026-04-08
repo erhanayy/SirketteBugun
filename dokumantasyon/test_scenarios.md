@@ -84,3 +84,26 @@ Bu doküman, sistemdeki **Uygulama Admin'i (Superadmin)**, **Şirket Yöneticisi
 **Şirket Çalışanı (Staff):**
 - [x] U10: Mesajlar ekranında 'Yeni Grup Oluştur' butonunu göremez; yalnızca eklendiği gruplarda mesaj paylaşabilir.
 - [x] U11: Grup sohbet penceresinde Kilitle, Katılımcı Düzenle ve Sohbeti Sil butonlarını göremez.
+
+## 9. Görevler ve Hatırlatmalar (Reminders)
+**Tüm Roller İçin Geçerli Senaryolar (Admin, Staff):**
+- [ ] Z17: Kullanıcı kendisine tekil veya tekrarlı hatırlatma oluşturabiliyor.
+- [ ] Z18: Görev listesinde sadece kendi oluşturduğu veya kendisine atanmış hatırlatmaları doğru renk kodlarıyla görebiliyor.
+- [ ] Z19: Hatırlatma tamamlandığında liste üzerinde güncelleniyor, eğer tekrarlı ise sıradaki kopya otomatik oluşuyor.
+
+**Şirket Yöneticisi (Admin/M):**
+- [ ] M17: Yönetici personel listesinden başka bir çalışanı seçerek ona hatırlatma atayabiliyor.
+
+## 10. Sistem Görevleri (Scheduler)
+**Uygulama Admini (Superadmin):**
+- [ ] A4: Yalnızca Superadmin erişebildiği `/dashboard/admin/scheduler` sayfasını görebiliyor.
+- [ ] A5: Admin veya Staff yetkilileri bu sayfaya girmeye çalıştığında ana sayfaya yönlendiriliyor.
+- [ ] A6: Scheduler sayfasındaki butonları kullanarak bekleyen görevleri manuel tetikleyebiliyor.
+
+## 11. Notlar (Post-it)
+**Tüm Roller İçin Geçerli Senaryolar (Admin, Staff, Superadmin):**
+- [ ] Z20: Kullanıcı "Yeni Not" butonuyla zemin rengi seçerek kişisel not ekleyebiliyor.
+- [ ] Z21: Kullanıcı eklediği notları "Notlarım" ekranında Post-it düzeninde görebiliyor.
+- [ ] Z22: Arama çubuğuna metin yazılarak yalnızca eşleşen Post-it notlarının görülmesi sağlanıyor.
+- [ ] Z23: Kullanıcı girdiği notu üzerine tıklayarak düzenleyebiliyor (Edit) veya silebiliyor.
+- [ ] Z24: Kullanıcı yalnızca KENDİ oluşturduğu notları görüyor, diğer kişilerin notları listesinde listelenmiyor.

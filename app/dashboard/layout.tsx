@@ -11,6 +11,7 @@ import {
     Briefcase,
     CreditCard,
     ClipboardList,
+    StickyNote,
 } from "lucide-react";
 
 import { getCurrentTenant } from "@/lib/data/tenant";
@@ -128,9 +129,13 @@ export default async function DashboardLayout({
                         <NavItem href="/dashboard/announcements" icon={Bell} label="Duyurular" badge={unreadAnnouncements > 0 ? unreadAnnouncements : undefined} />
                         <NavItem href="/dashboard/messages" icon={MessageCircle} label="Mesajlar" badge={totalUnread > 0 ? totalUnread : undefined} />
                         <NavItem href="/dashboard/business-cards" icon={Briefcase} label="Kartvizitler" />
-                        <NavItem href="/dashboard/projects" icon={ClipboardList} label="Proje & Task" />
+
+                        {/* İş */}
+                        <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">İş</div>
                         <NavItem href="/dashboard/organization" icon={Building} label="Organizasyon" />
-                        <NavItem href="/dashboard/members" icon={Users} label="Üyeler" />
+                        <NavItem href="/dashboard/projects" icon={ClipboardList} label="Proje & Task" />
+                        <NavItem href="/dashboard/reminders" icon={Bell} label="Hatırlatma" />
+                        <NavItem href="/dashboard/notes" icon={StickyNote} label="Notlar" />
 
                         {/* Yönetim */}
                         {(userRole === 'admin' || userRole === 'staff' || userRole === 'manager') && (
@@ -148,6 +153,7 @@ export default async function DashboardLayout({
                                 <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">Uygulama</div>
                                 <NavItem href="/dashboard/admin/tenants" icon={Building} label="Şirket Yönetimi" />
                                 <NavItem href="/dashboard/admin/payment-entry" icon={CreditCard} label="Ödeme Girişi" />
+                                <NavItem href="/dashboard/admin/scheduler" icon={Settings} label="Sistem Görevleri" />
                             </>
                         )}
 

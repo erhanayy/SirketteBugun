@@ -434,6 +434,51 @@ export const loginLogs = pgTable('login_logs', {
     userTimeIdx: index('login_logs_user_time_idx').on(t.userId, t.loggedInAt),
 }));
 
+// reminders (Hatırlatmalar)
+export const reminders = pgTable('reminders', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id').references(() => tenants.id).notNull(),
+    creatorId: uuid('creator_id').references(() => users.id).notNull(), // Kim oluşturdu
+    assigneeId: uuid('assignee_id').references(() => users.id).notNull(), // Kime atandı
+
+    title: text('title').notNull(),
+    description: text('description'), // Opsiyonel ek not
+
+    dueDate: timestamp('due_date').notNull(), // Hatırlatma tarihi/saati
+
+    isRecurring: boolean('is_recurring').default(false).notNull(),
+    recurringPattern: text('recurring_pattern'), // Örn: 'daily', 'weekly', 'monthly', 'yearly'
+
+    status: text('status', { enum: ['pending', 'completed', 'cancelled'] }).default('pending').notNull(),
+    completedAt: timestamp('completed_at'),
+
+    isNotified: boolean('is_notified').default(false).notNull(), // Bildirimleri gönderildi mi?
+
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (t) => ({
+    tenantIdx: index('reminders_tenant_idx').on(t.tenantId),
+    assigneeIdx: index('reminders_assignee_idx').on(t.assigneeId),
+    statusIdx: index('reminders_status_idx').on(t.status),
+}));
+
+// Notes (Post-it Notlar)
+export const notes = pgTable('notes', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    tenantId: uuid('tenant_id').references(() => tenants.id).notNull(),
+    userId: uuid('user_id').references(() => users.id).notNull(),
+    title: text('title'),
+    content: text('content').notNull(),
+    color: text('color').default('yellow').notNull(),
+    isActive: boolean('is_active').default(true).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (t) => ({
+    tenantIdx: index('notes_tenant_idx').on(t.tenantId),
+    userIdx: index('notes_user_idx').on(t.userId),
+}));
+
 // tenant_personalization (Şirket Kişiselleştirme - Renkler vb.)
 export const tenantPersonalization = pgTable('tenant_personalization', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -460,6 +505,9 @@ export const usersRelations = relations(users, ({ many, one }) => ({
     notifications: many(notifications),
     notificationSettings: many(userNotificationSettings),
     pushSubscriptions: many(pushSubscriptions),
+    createdReminders: many(reminders, { relationName: 'reminderCreator' }),
+    assignedReminders: many(reminders, { relationName: 'reminderAssignee' }),
+    notes: many(notes),
 }));
 
 export const tenantUsersRelations = relations(tenantUsers, ({ one }) => ({
@@ -787,4 +835,34 @@ export const tenantsRelations = relations(tenants, ({ many, one }) => ({
     users: many(tenantUsers),
     personalization: one(tenantPersonalization),
     loginLogs: many(loginLogs),
+    reminders: many(reminders),
 }));
+
+export const remindersRelations = relations(reminders, ({ one }) => ({
+    tenant: one(tenants, {
+        fields: [reminders.tenantId],
+        references: [tenants.id],
+    }),
+    creator: one(users, {
+        fields: [reminders.creatorId],
+        references: [users.id],
+        relationName: 'reminderCreator',
+    }),
+    assignee: one(users, {
+        fields: [reminders.assigneeId],
+        references: [users.id],
+        relationName: 'reminderAssignee',
+    }),
+}));
+
+export const notesRelations = relations(notes, ({ one }) => ({
+    tenant: one(tenants, {
+        fields: [notes.tenantId],
+        references: [tenants.id],
+    }),
+    user: one(users, {
+        fields: [notes.userId],
+        references: [users.id],
+    }),
+}));
+

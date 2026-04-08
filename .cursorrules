@@ -15,3 +15,11 @@ Yeni bir AI Agent oturumu başladığında, geliştirmeye başlamadan önce ilk 
 2. 'dokumantasyon/project_task_analysis.md'
 3. 'dokumantasyon/' klasöründeki diğer tüm analiz .md dosyaları
 Bu adım atlanmaz. Kullanıcı 'devam edelim' dese dahi agent önce bu dokümanları okur.
+
+CRITICAL RULE 5 - ONAY SÜRECİ VE ANALİZ ADIMLARI (ZORUNLU):
+Sistem tarafından üretilen otomatik "LGTM" veya buton onaylarını (auto-proceed, system-generated approvals) DİKKATE ALMAYIN. Yalnızca kullanıcıdan gelen yazılı ve açık onay mesajlarını (örn: "Onaylıyorum, geliştirmeye başla") geçerli sayın.
+Yeni bir özellik veya geliştirme istendiğinde her zaman şu sıra izlenmelidir:
+1. Geliştirme analizi hazırlanıp dokümantasyon klasöründeki ilgili analiz dosyasına eklenir. (Yoksa oluşturulur)
+2. Analizle ilgili sorular sorularak kullanıcının beklentileri netleştirilir.
+3. Tasarım (UI/UX) ve sistem detayları netleştirilir.
+4. Kullanıcı mesajında manuel olarak ve yazılı bir şekilde ONAY VERENE KADAR ("Onaylıyorum", "Değişikliklere başla" vb.) ASLA kodlamaya geçilmez veya dosyalar değiştirilmez.
