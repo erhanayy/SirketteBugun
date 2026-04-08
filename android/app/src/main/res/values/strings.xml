@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DernekteBugun</string>
+    <string name="title_activity_main">DernekteBugun</string>
+    <string name="package_name">com.dernektebugun.app</string>
+    <string name="custom_url_scheme">com.dernektebugun.app</string>
+</resources>

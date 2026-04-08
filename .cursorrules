@@ -1,0 +1,17 @@
+CRITICAL RULE: The user maintains two separate codebases ('DernekteBugun' and 'SirketteBugun'). Every user prompt MUST start with either 'DernekteBugun:' or 'SirketteBugun:' to specify which project to modify. If the user DOES NOT specify the target project, YOU MUST STOP and ASK the user which project they want to modify. Do NOT assume or guess. This is a strict rule.
+
+CRITICAL RULE 2: NEVER delete anything (code, file, table, database record, index) without FIRST asking the user for explicit permission. Even if you believe the deletion is necessary or correct, YOU MUST NOT take the initiative. ALWAYS ASK FOR APPROVAL before performing any deletion.
+
+CRITICAL RULE 3 - ANALİZ VE TEST SENARYOSU DOKÜMANTASYONU (ZORUNLU):
+Her geliştirme, düzeltme veya süreç değişikliğinde — kullanıcı söylemese dahi — aşağıdaki adımlar otomatik olarak uygulanır:
+1. İlgili değişiklik 'dokumantasyon/' klasöründeki uygun analiz dosyasına eklenir. Yeni bir konu ise yeni dosya oluşturulur.
+2. Her değişiklik için test senaryosu 'dokumantasyon/test_scenarios.md' dosyasındaki ilgili başlık altına eklenir.
+   Format: '- [x] KOD: Açıklama' veya '- [ ] KOD: Açıklama'
+   Kodlar: Z1,Z2... (genel), A1,A2... (admin), M1,M2... (manager/superadmin), U1,U2... (staff)
+
+CRITICAL RULE 4 - YENİ AGENT BAŞLANGIÇ PROTOKOLÜ (ZORUNLU):
+Yeni bir AI Agent oturumu başladığında, geliştirmeye başlamadan önce ilk adım olarak şu dosyalar okunur:
+1. 'dokumantasyon/test_scenarios.md'
+2. 'dokumantasyon/project_task_analysis.md'
+3. 'dokumantasyon/' klasöründeki diğer tüm analiz .md dosyaları
+Bu adım atlanmaz. Kullanıcı 'devam edelim' dese dahi agent önce bu dokümanları okur.

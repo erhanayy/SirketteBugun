@@ -1,0 +1,61 @@
+
+--- EMAIL SIMULATION (2026-02-19T18:42:48.440Z) ---
+To: erhanayyildiz@hotmail.com
+Subject: Geçici Şifreniz
+Body:
+Merhaba Erhan Ayyıldız,
+
+Şifre sıfırlama talebiniz üzerine geçici şifreniz oluşturuldu.
+
+Geçici Şifre: eeur73bj
+
+Lütfen bu şifre ile giriş yapın. Giriş yaptıktan sonra şifrenizi değiştirmeniz istenecektir.
+
+DernekteBugün Yönetimi
+----------------------------------------------------
+
+--- EMAIL SIMULATION (2026-02-19T18:42:48.444Z) ---
+To: erhanayyildiz@hotmail.com
+Subject: [KOPYA] Şifre Sıfırlama: Erhan Ayyıldız
+Body:
+Kullanıcı: Erhan Ayyıldız (erhanayyildiz@hotmail.com)
+Yeni Şifre: eeur73bj
+----------------------------------------------------
+
+--- EMAIL SIMULATION (2026-02-19T18:49:52.610Z) ---
+To: erhanayyildiz@hotmail.com
+Subject: Geçici Şifreniz
+Body:
+Merhaba Erhan Ayyıldız,
+
+Şifre sıfırlama talebiniz üzerine geçici şifreniz oluşturuldu.
+
+Geçici Şifre: 05b4vwhj
+
+Lütfen bu şifre ile giriş yapın. Giriş yaptıktan sonra şifrenizi değiştirmeniz istenecektir.
+
+DernekteBugün Yönetimi
+----------------------------------------------------
+
+--- EMAIL SIMULATION (2026-02-19T18:49:52.613Z) ---
+To: erhanayyildiz@hotmail.com
+Subject: [KOPYA] Şifre Sıfırlama: Erhan Ayyıldız
+Body:
+Kullanıcı: Erhan Ayyıldız (erhanayyildiz@hotmail.com)
+Yeni Şifre: 05b4vwhj
+----------------------------------------------------
+
+--- EMAIL SIMULATION (2026-02-20T17:44:08.690Z) ---
+To: guvengulesce@db.com
+Subject: Geçici Şifreniz
+Body:
+Merhaba Güven Gülesce,
+
+Şifre sıfırlama talebiniz üzerine geçici şifreniz oluşturuldu.
+
+Geçici Şifre: pbgudq0f
+
+Lütfen bu şifre ile giriş yapın. Giriş yaptıktan sonra şifrenizi değiştirmeniz istenecektir.
+
+DernekteBugün Yönetimi
+----------------------------------------------------

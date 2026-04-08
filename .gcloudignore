@@ -1,0 +1,7 @@
+node_modules/
+.git/
+.next/
+android/
+ios/
+.env.local
+.env.local.cloud
