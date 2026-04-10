@@ -1,6 +1,7 @@
 import { getMembers } from "@/lib/actions/member";
 import { getDemoData } from "@/lib/data/demo";
 import { getCurrentTenant } from "@/lib/data/tenant";
+import { formatPhoneForDisplay } from "@/lib/phone";
 import { Search as SearchIcon, Plus, User, Phone, Mail, Shield, Pencil } from "lucide-react";
 import Link from "next/link";
 import Search from "./search";
@@ -77,7 +78,7 @@ export default async function MembersPage({
 
                                             <div className="flex items-center gap-2 mt-1 text-sm text-gray-500 dark:text-gray-400">
                                                 <Phone className="w-3.5 h-3.5" />
-                                                <span>{member.phoneNumber}</span>
+                                                <span>{formatPhoneForDisplay(member.phoneNumber)}</span>
                                             </div>
 
                                             {member.email && (
@@ -124,7 +125,7 @@ export default async function MembersPage({
 
                                             <div className="flex items-center gap-2 mt-1 text-sm text-gray-500 dark:text-gray-400">
                                                 <Phone className="w-3.5 h-3.5" />
-                                                <span>{member.phoneNumber}</span>
+                                                <span>{formatPhoneForDisplay(member.phoneNumber)}</span>
                                             </div>
 
                                             {member.email && (

@@ -99,7 +99,7 @@ export default function PostComposer({ tenantData, isPremium, onPostCreated }: {
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        placeholder="Derneğinizde neler oluyor? Bir şeyler paylaşın..."
+                        placeholder="Şirketinizde neler oluyor? Bir şeyler paylaşın..."
                         className="w-full bg-transparent resize-none outline-none min-h-[80px] text-gray-800 dark:text-gray-100 placeholder:text-gray-400"
                     />
 

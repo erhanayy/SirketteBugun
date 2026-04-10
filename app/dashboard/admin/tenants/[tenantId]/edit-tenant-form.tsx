@@ -2,31 +2,31 @@
 
 import { createTenant, updateTenant } from "@/lib/actions/superadmin";
 import { useRouter } from "next/navigation";
-import { useTransition, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Save, Loader2, Building, AlertCircle } from "lucide-react";
 
 export function EditTenantForm({ initialData }: { initialData: any | null }) {
     const isNew = !initialData;
     const router = useRouter();
-    const [isPending, startTransition] = useTransition();
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
     async function handleSubmit(formData: FormData) {
         setError(null);
-        startTransition(async () => {
-            try {
-                if (isNew) {
-                    await createTenant(formData);
-                } else {
-                    await updateTenant(initialData.id, formData);
-                }
-                router.push('/dashboard/admin/tenants');
-                router.refresh();
-            } catch (err: any) {
-                setError(err.message || "Bir hata oluştu");
+        setIsLoading(true);
+        try {
+            if (isNew) {
+                await createTenant(formData);
+            } else {
+                await updateTenant(initialData.id, formData);
             }
-        });
+            router.push('/dashboard/admin/tenants');
+            router.refresh();
+        } catch (err: any) {
+            setError(err.message || "Bir hata oluştu");
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -103,10 +103,10 @@ export function EditTenantForm({ initialData }: { initialData: any | null }) {
             <div className="pt-6 border-t border-gray-200 dark:border-zinc-800 flex justify-end">
                 <button
                     type="submit"
-                    disabled={isPending}
+                    disabled={isLoading}
                     className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    {isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
+                    {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
                     {isNew ? 'Şirketi Oluştur' : 'Değişiklikleri Kaydet'}
                 </button>
             </div>

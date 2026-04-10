@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { tenants, tenantUsers, users } from "@/lib/db/schema";
-import { eq, and } from "drizzle-orm";
+import { eq, and, asc } from "drizzle-orm";
 import { cookies } from "next/headers";
 
 export async function getCurrentTenant() {
@@ -28,6 +28,21 @@ export async function getCurrentTenant() {
         .innerJoin(users, eq(tenantUsers.userId, users.id))
         .where(eq(tenantUsers.userId, session.user.id));
 
+    let availableTenantsForUI = memberships.map(m => ({
+        id: m.tenant.id,
+        shortName: m.tenant.shortName,
+        longName: m.tenant.longName
+    }));
+    if (session.user.isApplicationAdmin) {
+        availableTenantsForUI = await db.select({
+            id: tenants.id,
+            shortName: tenants.shortName,
+            longName: tenants.longName
+        }).from(tenants)
+            .where(eq(tenants.isActive, true))
+            .orderBy(asc(tenants.longName));
+    }
+
     let activeMembership = null;
 
     if (tenantIdFromCookie) {
@@ -35,8 +50,19 @@ export async function getCurrentTenant() {
     }
 
     // Superadmin (App Admin) Impersonation Override
-    if (!activeMembership && session.user.isApplicationAdmin && tenantIdFromCookie) {
-        const targetTenant = await db.query.tenants.findFirst({ where: eq(tenants.id, tenantIdFromCookie) });
+    if (!activeMembership && session.user.isApplicationAdmin) {
+        let targetTenant = null;
+
+        // 1. Try to load from cookie first
+        if (tenantIdFromCookie) {
+            targetTenant = await db.query.tenants.findFirst({ where: eq(tenants.id, tenantIdFromCookie) });
+        }
+
+        // 2. If cookie was invalid, deleted, or didn't exist, try the first active tenant from UI list
+        if (!targetTenant && availableTenantsForUI.length > 0) {
+            targetTenant = await db.query.tenants.findFirst({ where: eq(tenants.id, availableTenantsForUI[0].id) });
+        }
+
         if (targetTenant) {
             return {
                 tenantId: targetTenant.id,
@@ -47,10 +73,24 @@ export async function getCurrentTenant() {
                 websiteUrl: targetTenant.websiteUrl,
                 userRole: 'admin', // Grant highest tenant role 
                 userName: session.user.name || "Süper Admin",
-                availableTenants: memberships.map(m => m.tenant),
+                availableTenants: availableTenantsForUI,
                 forcePasswordChange: false,
             };
         }
+
+        // If NO companies exist at all in the database, return a completely virtual system tenant so they don't infinite loop
+        return {
+            tenantId: '00000000-0000-0000-0000-000000000000',
+            userId: session.user.id,
+            tenantName: 'Sistem Yönetimi (Şirket Yok)',
+            tenantShortName: 'Admin',
+            logoUrl: null,
+            websiteUrl: null,
+            userRole: 'admin',
+            userName: session.user.name || "Süper Admin",
+            availableTenants: availableTenantsForUI, // Pass it just in case
+            forcePasswordChange: false,
+        };
     }
 
     // Fallback: If no cookie or cookie is invalid (user not member of that tenant), use the first one
@@ -68,7 +108,7 @@ export async function getCurrentTenant() {
         websiteUrl: activeMembership.tenant.websiteUrl,
         userRole: activeMembership.role,
         userName: activeMembership.user.fullName || session.user.name || "Kullanıcı",
-        availableTenants: memberships.map(m => m.tenant),
+        availableTenants: availableTenantsForUI,
         forcePasswordChange: activeMembership.user.forcePasswordChange,
     };
 }

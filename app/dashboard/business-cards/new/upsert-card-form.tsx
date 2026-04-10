@@ -6,6 +6,7 @@ import { useActionState, useState, useRef } from "react";
 import { Save, User, Building2, Briefcase, Phone, Mail, GraduationCap, Calendar, Camera, AlertCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 const initialState = {
     error: undefined,
@@ -168,8 +169,9 @@ export default function UpsertCardForm({ tenantData, existingCard }: { tenantDat
                         <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
                             Telefon <span className="text-red-500">*</span>
                         </label>
-                        <input
-                            name="phone" type="tel" required placeholder="0555 555 55 55"
+                        <PhoneInput
+                            name="phone"
+                            required={true}
                             defaultValue={existingCard?.phone}
                             className="w-full bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none"
                         />

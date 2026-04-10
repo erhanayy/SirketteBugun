@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, KeyRound, User, Bell, ShieldCheck, FileText } from "lucide-react";
+import { ChevronRight, KeyRound, User, Bell, ShieldCheck, FileText, Info } from "lucide-react";
 
 export default function SettingsPage() {
     return (
@@ -7,6 +7,23 @@ export default function SettingsPage() {
             <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Ayarlar</h1>
 
             <div className="bg-white dark:bg-zinc-900 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm overflow-hidden divide-y divide-gray-100 dark:divide-zinc-800">
+                {/* About Page */}
+                <Link
+                    href="/dashboard/settings/about"
+                    className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors group"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center group-hover:bg-orange-200 dark:group-hover:bg-orange-900/50 transition-colors">
+                            <Info className="w-5 h-5" />
+                        </div>
+                        <div>
+                            <h3 className="font-medium text-gray-900 dark:text-white">Hakkında</h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Versiyon ve uygulama bilgileri</p>
+                        </div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+                </Link>
+
                 {/* Password Change */}
                 <Link
                     href="/dashboard/settings/password"

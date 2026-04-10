@@ -38,6 +38,7 @@ import { MobilePermissionsModal } from "@/components/mobile-permissions-modal";
 import { BadgePoller } from "@/components/badge-poller";
 import { HeaderLogo, HeaderTenantName } from "@/components/header-actions";
 import Image from "next/image";
+import { SidebarMenu } from "./sidebar-menu";
 
 export default async function DashboardLayout({
     children,
@@ -69,7 +70,7 @@ export default async function DashboardLayout({
         logActivityAction(tenantData.tenantId).catch(console.error); // Fire and forget
     }
 
-    const activeTenantName = tenantData?.tenantShortName || "DernekteBugün";
+    const activeTenantName = tenantData?.tenantShortName || "ŞirketteBugün";
     const userRole = tenantData?.userRole || "member";
 
     const isForceChange = tenantData?.forcePasswordChange;
@@ -121,50 +122,14 @@ export default async function DashboardLayout({
                     <div className="h-16 flex items-center px-6 border-b border-gray-200/20 dark:border-zinc-800 font-bold text-lg text-[var(--menu-text)]">
                         {tenantData?.userName}
                     </div>
-                    <nav className="flex-1 p-4 overflow-y-auto space-y-1">
-                        {/* Sosyal */}
-                        <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2">Sosyal</div>
-                        <NavItem href="/dashboard/home" icon={Home} label="Ana Sayfa" badge={unreadSposts > 0 ? unreadSposts : undefined} />
-                        <NavItem href="/dashboard/events" icon={Calendar} label="Etkinlikler" badge={unreadEvents > 0 ? unreadEvents : undefined} />
-                        <NavItem href="/dashboard/announcements" icon={Bell} label="Duyurular" badge={unreadAnnouncements > 0 ? unreadAnnouncements : undefined} />
-                        <NavItem href="/dashboard/messages" icon={MessageCircle} label="Mesajlar" badge={totalUnread > 0 ? totalUnread : undefined} />
-                        <NavItem href="/dashboard/business-cards" icon={Briefcase} label="Kartvizitler" />
-
-                        {/* İş */}
-                        <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">İş</div>
-                        <NavItem href="/dashboard/members" icon={Users} label="Çalışanlar" />
-                        <NavItem href="/dashboard/organization" icon={Building} label="Organizasyon" />
-                        <NavItem href="/dashboard/projects" icon={ClipboardList} label="Proje & Task" />
-                        <NavItem href="/dashboard/reminders" icon={Bell} label="Hatırlatma" />
-                        <NavItem href="/dashboard/notes" icon={StickyNote} label="Notlar" />
-                        <NavItem href="/dashboard/flows" icon={ClipboardList} label="Akışlar" />
-
-                        {/* Yönetim */}
-                        {(userRole === 'admin' || userRole === 'manager') && (
-                            <>
-                                <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">Yönetim</div>
-                                <NavItem href="/dashboard" icon={LayoutDashboard} label="Genel Bakış" />
-                                <NavItem href="/dashboard/tenant-settings" icon={Building} label="Şirket Bilgileri" />
-                                <NavItem href="/dashboard/ibans" icon={CreditCard} label="Banka Hesapları" />
-                                <NavItem href="/dashboard/admin/approvals" icon={Settings} label="Akış Tanımlama" />
-                            </>
-                        )}
-
-                        {/* Uygulama (Super Admin) */}
-                        {isApplicationAdmin && (
-                            <>
-                                <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">Uygulama</div>
-                                <NavItem href="/dashboard/admin/tenants" icon={Building} label="Şirket Yönetimi" />
-                                <NavItem href="/dashboard/admin/payment-entry" icon={CreditCard} label="Ödeme Girişi" />
-                                <NavItem href="/dashboard/admin/scheduler" icon={Settings} label="Sistem Görevleri" />
-                            </>
-                        )}
-
-                        {/* Ayarlar */}
-                        <div className="bg-white/10 text-white px-3 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider mb-2 mt-6">Ayarlar</div>
-                        <NavItem href="/dashboard/settings" icon={Settings} label="Ayarlar" />
-                        <SignOutButton />
-                    </nav>
+                    <SidebarMenu
+                        unreadSposts={unreadSposts}
+                        unreadEvents={unreadEvents}
+                        unreadAnnouncements={unreadAnnouncements}
+                        totalUnread={totalUnread}
+                        userRole={userRole}
+                        isApplicationAdmin={isApplicationAdmin}
+                    />
                 </aside>
 
                 {/* ─── Main Content ─── */}
@@ -240,32 +205,3 @@ export default async function DashboardLayout({
     );
 }
 
-function NavItem({
-    href,
-    icon: Icon,
-    label,
-    badge,
-}: {
-    href: string;
-    icon: any;
-    label: string;
-    active?: boolean;
-    badge?: number;
-}) {
-    return (
-        <Link
-            href={href}
-            className="flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors text-white/80 hover:bg-white/10 hover:text-white"
-        >
-            <div className="flex items-center gap-3">
-                <Icon className="w-5 h-5 opacity-80" />
-                {label}
-            </div>
-            {badge && (
-                <span className="bg-red-500 text-white text-[10px] font-bold px-1.5 h-5 min-w-[20px] rounded-full flex items-center justify-center shadow-sm border border-white/20">
-                    {badge}
-                </span>
-            )}
-        </Link>
-    );
-}

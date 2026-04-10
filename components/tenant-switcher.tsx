@@ -53,7 +53,7 @@ export function TenantSwitcher({
                             <button
                                 key={tenant.id}
                                 onClick={() => handleSwitch(tenant.id)}
-                                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-700 flex items-center justify-between"
+                                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-zinc-700 flex items-center justify-between text-gray-900 dark:text-gray-100"
                             >
                                 <span>{tenant.shortName}</span>
                                 {currentTenant.id === tenant.id && (

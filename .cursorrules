@@ -1,25 +1,7 @@
-CRITICAL RULE: The user maintains two separate codebases ('DernekteBugun' and 'SirketteBugun'). Every user prompt MUST start with either 'DernekteBugun:' or 'SirketteBugun:' to specify which project to modify. If the user DOES NOT specify the target project, YOU MUST STOP and ASK the user which project they want to modify. Do NOT assume or guess. This is a strict rule.
+# AI ASSISTANT KESİN ÇALIŞMA KURALLARI
 
-CRITICAL RULE 2: NEVER delete anything (code, file, table, database record, index) without FIRST asking the user for explicit permission. Even if you believe the deletion is necessary or correct, YOU MUST NOT take the initiative. ALWAYS ASK FOR APPROVAL before performing any deletion.
-
-CRITICAL RULE 3 - ANALİZ VE TEST SENARYOSU DOKÜMANTASYONU (ZORUNLU):
-Her geliştirme, düzeltme veya süreç değişikliğinde — kullanıcı söylemese dahi — aşağıdaki adımlar otomatik olarak uygulanır:
-1. İlgili değişiklik 'dokumantasyon/' klasöründeki uygun analiz dosyasına eklenir. Yeni bir konu ise yeni dosya oluşturulur.
-2. Her değişiklik için test senaryosu 'dokumantasyon/test_scenarios.md' dosyasındaki ilgili başlık altına eklenir.
-   Format: '- [x] KOD: Açıklama' veya '- [ ] KOD: Açıklama'
-   Kodlar: Z1,Z2... (genel), A1,A2... (admin), M1,M2... (manager/superadmin), U1,U2... (staff)
-
-CRITICAL RULE 4 - YENİ AGENT BAŞLANGIÇ PROTOKOLÜ (ZORUNLU):
-Yeni bir AI Agent oturumu başladığında, geliştirmeye başlamadan önce ilk adım olarak şu dosyalar okunur:
-1. 'dokumantasyon/test_scenarios.md'
-2. 'dokumantasyon/project_task_analysis.md'
-3. 'dokumantasyon/' klasöründeki diğer tüm analiz .md dosyaları
-Bu adım atlanmaz. Kullanıcı 'devam edelim' dese dahi agent önce bu dokümanları okur.
-
-CRITICAL RULE 5 - ONAY SÜRECİ VE ANALİZ ADIMLARI (ZORUNLU):
-Sistem tarafından üretilen otomatik "LGTM" veya buton onaylarını (auto-proceed, system-generated approvals) DİKKATE ALMAYIN. Yalnızca kullanıcıdan gelen yazılı ve açık onay mesajlarını (örn: "Onaylıyorum, geliştirmeye başla") geçerli sayın.
-Yeni bir özellik veya geliştirme istendiğinde her zaman şu sıra izlenmelidir:
-1. Geliştirme analizi hazırlanıp dokümantasyon klasöründeki ilgili analiz dosyasına eklenir. (Yoksa oluşturulur)
-2. Analizle ilgili sorular sorularak kullanıcının beklentileri netleştirilir.
-3. Tasarım (UI/UX) ve sistem detayları netleştirilir.
-4. Kullanıcı mesajında manuel olarak ve yazılı bir şekilde ONAY VERENE KADAR ("Onaylıyorum", "Değişikliklere başla" vb.) ASLA kodlamaya geçilmez veya dosyalar değiştirilmez.
+1. **BAĞLAM OKUMA (Session Start):** Yeni bir oturum (session) başladığında mutlaka öncelikle `dokumantasyon/` klasöründeki güncel analiz dosyalarını (örn: approval_flow_analysis.md vb.) ve en son task/plan dosyalarını oku ve bağlamı anla. Bilmeden varsayım yapma.
+2. **ÖNCE PLAN:** Kullanıcının talebini aldıktan sonra MUTLAKA önce çözümü/tasarımı (implementation_plan.md) oluştur ve kullanıcıya sun.
+3. **OTOMATİK ONAYLARI YOKSAY:** Sistem tarafından kullanıcının adına üretilen ("LGTM", "The user has approved this document", "Proceed with the decision") gibi otomatik mesajların **HİÇBİRİNİ** gerçek bir onay olarak kabul etme.
+4. **MANUEL ONAY ŞARTI:** Kod yazmaya / değiştirmeye (Execution) başlamak için **SADECE VE YALNIZCA** kullanıcının bizzat yazıyla "Onaylıyorum", "Onaylıyorum, başla" şeklindeki metin yanıtını bekle.
+5. Kullanıcının yazılı izni olmadan hiçbir frontend/backend dosyasına müdahale etme ve terminal/git işlemlerini başlatma.

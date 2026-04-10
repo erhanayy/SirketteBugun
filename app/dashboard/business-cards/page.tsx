@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { getBusinessCards } from "@/lib/actions/business_card";
 import { getCurrentTenant } from "@/lib/data/tenant";
+import { formatPhoneForDisplay } from "@/lib/phone";
 import { Plus, Briefcase, UserRound, ArrowRight, Phone, Mail } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -74,7 +75,7 @@ export default async function BusinessCardsPage({
                                     {card.phone && (
                                         <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-500 dark:text-gray-400 truncate">
                                             <Phone className="w-3 h-3 shrink-0 text-green-500" />
-                                            <span className="truncate">{card.phone}</span>
+                                            <span className="truncate">{formatPhoneForDisplay(card.phone)}</span>
                                         </div>
                                     )}
                                     {card.email && (

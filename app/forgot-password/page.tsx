@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { forgotPassword } from "@/lib/actions/auth";
 import Link from "next/link";
 import { ArrowLeft, Loader2, KeyRound } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 const initialState = {
     message: '',
@@ -28,8 +29,8 @@ export default function ForgotPasswordPage() {
 
                 {state.message && (
                     <div className={`p-4 rounded-lg mb-6 text-sm font-medium ${state.success
-                            ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 border border-green-200 dark:border-green-800"
-                            : "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-800"
+                        ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-400 border border-green-200 dark:border-green-800"
+                        : "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400 border border-red-200 dark:border-red-800"
                         }`}>
                         {state.message}
                     </div>
@@ -41,11 +42,9 @@ export default function ForgotPasswordPage() {
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                 Telefon Numarası
                             </label>
-                            <input
-                                type="text"
+                            <PhoneInput
                                 name="phone"
-                                placeholder="05XXXXXXXXX"
-                                required
+                                required={true}
                                 className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                             />
                         </div>

@@ -23,10 +23,7 @@ export async function authenticate(
 
         // Retrieve user to check contracts
         const userRecord = await db.query.users.findFirst({
-            where: (users, { eq, or }) => or(
-                eq(users.email, identifier),
-                eq(users.phoneNumber, identifier)
-            )
+            where: (users, { eq }) => eq(users.email, identifier)
         });
 
         if (userRecord) {
@@ -126,18 +123,21 @@ export async function updateForcedPassword(prevState: any, formData: FormData) {
 }
 
 export async function forgotPassword(prevState: any, formData: FormData) {
-    const emailInput = (formData.get("email") as string)?.trim() ||
-        (formData.get("identifier") as string)?.trim() || '';
+    const emailInput = (formData.get("email") as string)?.trim() || '';
+    const phoneInput = (formData.get("phone") as string)?.trim() || '';
 
-    console.log("[forgotPassword] emailInput:", emailInput);
+    console.log("[forgotPassword] emailInput:", emailInput, "phoneInput:", phoneInput);
 
-    if (!emailInput) {
-        return { message: "Lütfen e-posta adresinizi girin.", success: false };
+    if (!emailInput || !phoneInput) {
+        return { message: "Lütfen e-posta adresinizi ve telefonunuzu girin.", success: false };
     }
 
-    // 1. Find user by email
+    // 1. Find user by exact match of email AND phone (stripped format happens via component)
     const user = await db.query.users.findFirst({
-        where: (users, { eq }) => eq(users.email, emailInput)
+        where: (users, { eq, and }) => and(
+            eq(users.email, emailInput),
+            eq(users.phoneNumber, phoneInput)
+        )
     });
 
     console.log("[forgotPassword] user found:", user ? `id=${user.id}, email=${user.email}` : "NOT FOUND");

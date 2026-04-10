@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { parameters, tenantUserOffers, tenantUserOfferPrices } from "@/lib/db/schema";
 import { eq, or, and, gte, lte } from "drizzle-orm";
 import { getCurrentTenant } from "@/lib/data/tenant";
+import { auth } from "@/auth";
 
 // 1. Get IBAN Parameters for the Upsell UI
 export async function getPremiumIbanDetails() {
@@ -97,6 +98,9 @@ export async function getActiveOffers() {
 // 4. Check if current user is Premium
 export async function checkIsPremium() {
     try {
+        const session = await auth();
+        if (session?.user?.isApplicationAdmin) return true;
+
         const currentTenant = await getCurrentTenant();
         if (!currentTenant) return false;
 

@@ -10,10 +10,7 @@ import bcrypt from 'bcryptjs';
 async function getUser(identifier: string) {
     try {
         const user = await db.select().from(users).where(
-            or(
-                eq(users.email, identifier),
-                eq(users.phoneNumber, identifier)
-            )
+            eq(users.email, identifier)
         ).limit(1);
         return user[0];
     } catch (error) {
