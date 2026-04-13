@@ -16,8 +16,8 @@ export default function LoginPage() {
         <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-zinc-950">
             <div className="w-full max-w-md p-8 bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-gray-200 dark:border-zinc-800">
                 <div className="text-center mb-8 flex flex-col items-center">
-                    <div className="w-24 h-24 rounded-full overflow-hidden mb-4 shadow-lg focus:outline-none flex items-center justify-center">
-                        <Image src="/logo-v2.png" alt="Şirkette Bugün" width={120} height={120} className="w-full h-full object-cover scale-[1.65] origin-center" />
+                    <div className="w-24 h-24 flex items-center justify-center mb-4">
+                        <Image src="/sirkettebugun-logo-v4.png" alt="Şirkette Bugün" width={100} height={100} className="w-full h-full object-contain scale-150" />
                     </div>
                     <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
                         Şirkette Bugün
