@@ -81,8 +81,8 @@ export default async function DashboardLayout({
                 <ForcePasswordCheck forcePasswordChange={!!isForceChange} />
                 <div className="w-full max-w-4xl">
                     <header className="mb-8 text-center flex flex-col items-center justify-center">
-                        <div className="w-20 h-20 rounded-full border border-gray-100 overflow-hidden bg-white shadow-sm flex items-center justify-center p-2 transition-transform duration-300 group-hover:scale-[1.03]">
-                            <Image src="/sirkettebugun-logo-v4.png" alt="Şirkette Bugün" width={100} height={100} className="w-full h-full object-contain scale-150 transition-transform duration-300" />
+                        <div className="w-24 h-24 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center p-1 transition-transform duration-300 group-hover:scale-[1.03] mx-auto">
+                            <Image src="/sirkettebugun-logo-v4.png" alt="Şirkette Bugün" width={120} height={120} className="w-full h-full object-contain transition-transform duration-300" />
                         </div>
                         <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
                             Şirkette Bugün
@@ -183,8 +183,8 @@ export default async function DashboardLayout({
                                 logoUrl={tenantData?.logoUrl}
                             />
                             {/* Far Right: Global App Logo (Masked into a perfect circle) */}
-                            <div className="w-8 h-8 rounded-full border border-gray-100 overflow-hidden bg-white shadow-sm flex items-center justify-center p-0.5">
-                                <Image src="/sirkettebugun-logo-v4.png" alt="App Logo" width={40} height={40} className="w-full h-full object-contain scale-150" />
+                            <div className="w-8 h-8 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center p-1">
+                                <Image src="/sirkettebugun-logo-v5.png" alt="App Logo" width={40} height={40} className="w-full h-full object-contain" />
                             </div>
                         </div>
                     </header>
