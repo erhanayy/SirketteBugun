@@ -30,7 +30,7 @@ import { ForcePasswordCheck } from "./force-password-check";
 import { checkIsPremium, getSystemLimits } from "@/lib/actions/premium";
 import { PremiumWrapper } from "@/components/premium-wrapper";
 import { auth } from "@/auth";
-import { MobileNavBar } from "@/components/mobile-nav-bar";
+import { MobileWorkNavBar, MobileSocialNavBar } from "@/components/mobile-nav-bar";
 import { MobileAvatarMenu } from "@/components/mobile-avatar-menu";
 import { getTenantPersonalization } from "@/lib/actions/tenant-settings";
 import { logActivityAction } from "@/lib/actions/dashboard-stats";
@@ -183,22 +183,25 @@ export default async function DashboardLayout({
                                 logoUrl={tenantData?.logoUrl}
                             />
                             {/* Far Right: Global App Logo (Masked into a perfect circle) */}
-                            <div className="w-8 h-8 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center p-1">
-                                <Image src="/sirkettebugun-logo-v5.png" alt="App Logo" width={40} height={40} className="w-full h-full object-contain" />
+                            <div className="w-8 h-8 rounded-full border border-gray-100 bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                                <Image src="/sirkettebugun-logo-v6.jpeg" alt="App Logo" width={40} height={40} className="w-full h-full object-cover scale-[1.20]" />
                             </div>
                         </div>
                     </header>
 
-                    {/* Mobile Navigation Icon Bar */}
-                    <MobileNavBar
+                    {/* Mobile Navigation Icon Bar (Top / Work) */}
+                    <MobileWorkNavBar />
+
+                    {/* Page Content with standard bottom padding since Nav uses safe area */}
+                    <main className="flex-1 p-4 lg:p-6 overflow-y-auto overflow-x-hidden max-w-full w-full pb-4 lg:pb-6">{children}</main>
+
+                    {/* Mobile Social Icon Bar (Bottom) */}
+                    <MobileSocialNavBar
                         unreadSposts={unreadSposts}
                         unreadEvents={unreadEvents}
                         unreadAnnouncements={unreadAnnouncements}
                         unreadMessages={totalUnread}
                     />
-
-                    {/* Page Content with safe area bottom padding for mobile edge-to-edge */}
-                    <main className="flex-1 p-4 lg:p-6 overflow-y-auto overflow-x-hidden max-w-full w-full pb-[calc(env(safe-area-inset-bottom)+2rem)] lg:pb-6">{children}</main>
                 </div>
             </div>
         </PremiumWrapper>

@@ -93,6 +93,14 @@ export function MobileAvatarMenu({ userName, userRole, isApplicationAdmin, logoU
                                         <CreditCard className="w-4 h-4" />
                                         Banka Hesapları
                                     </Link>
+                                    <Link
+                                        href="/dashboard/admin/approvals"
+                                        onClick={() => setIsOpen(false)}
+                                        className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition"
+                                    >
+                                        <Settings className="w-4 h-4" />
+                                        Akış Tanımlama
+                                    </Link>
                                 </>
                             )}
                             {isApplicationAdmin && (

@@ -15,6 +15,7 @@ import {
     CreditCard,
     ClipboardList,
     StickyNote,
+    Workflow,
     ChevronDown
 } from "lucide-react";
 import { SignOutButton } from "@/components/sign-out-button";
@@ -130,7 +131,7 @@ export function SidebarMenu({
                     <NavItem href="/dashboard/projects" icon={ClipboardList} label="Proje & Task" />
                     <NavItem href="/dashboard/reminders" icon={Bell} label="Hatırlatma" />
                     <NavItem href="/dashboard/notes" icon={StickyNote} label="Notlar" />
-                    <NavItem href="/dashboard/flows" icon={ClipboardList} label="Akışlar" />
+                    <NavItem href="/dashboard/flows" icon={Workflow} label="Akışlar" />
                 </div>
             )}
 

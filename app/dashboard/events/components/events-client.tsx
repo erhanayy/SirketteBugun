@@ -50,9 +50,9 @@ export default function EventsClient({ initialEvents, userId, userRole }: { init
     };
 
     return (
-        <div className="flex flex-col gap-8 md:flex-row md:items-start h-full">
+        <div className="flex flex-col gap-8 h-full max-w-4xl mx-auto w-full">
             {/* Calendar Section */}
-            <div className="bg-white dark:bg-zinc-900 p-2 sm:p-4 rounded-xl shadow-sm border border-gray-200 dark:border-zinc-800 flex justify-center md:justify-start w-full max-w-full overflow-x-auto">
+            <div className="bg-white dark:bg-zinc-900 p-2 sm:p-4 rounded-xl shadow-sm border border-gray-200 dark:border-zinc-800 flex justify-center w-full md:w-fit mx-auto overflow-x-auto">
                 <style>{`
                  .rdp-day_selected { 
                     background-color: #2563eb !important; 

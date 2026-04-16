@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>DernekteBugun</string>
+        <string>SirketteBugun</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -46,10 +46,12 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Derneğiniz için fotoğraf çekebilmeniz ve profil resmi güncelleyebilmeniz için kamera erişimi gereklidir.</string>
+	<string>We need access to your camera to take photos for your posts.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Galerinizden logo veya fotoğraf seçebilmeniz için kütüphane erişimi gereklidir.</string>
+	<string>We need access to your photo library to pick images for your posts.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Fotoğrafları galerinize kaydedebilmek için izin gereklidir.</string>
+	<string>We need access to save photos to your library.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone to record videos for your posts.</string>
 </dict>
 </plist>

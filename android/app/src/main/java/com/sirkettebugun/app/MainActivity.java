@@ -1,4 +1,4 @@
-package com.dernektebugun.app;
+package com.sirkettebugun.app;
 
 import com.getcapacitor.BridgeActivity;
 

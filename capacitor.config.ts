@@ -5,7 +5,8 @@ const config: CapacitorConfig = {
   appName: 'SirketteBugun',
   webDir: 'public',
   server: {
-    url: 'https://dernekte.bugunai.com'
+    url: 'http://192.168.1.35:3000',
+    cleartext: true
   }
 };
 
